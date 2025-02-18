@@ -1,0 +1,15 @@
+---
+networks:
+  frontend:
+    external: true
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: unless-stopped
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-http.rule=Host(`app1.home.sebastian.-ratajczak.de`)
+      - traefik.http.routers.nginx-http.entrypoint=web
