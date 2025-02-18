@@ -11,5 +11,5 @@ services:
       - frontend
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nginx-http.rule=Host(`app1.home.sebastian.-ratajczak.de`)
+      - traefik.http.routers.nginx-http.rule=Host(`app1.test.home.sebastian.-ratajczak.de`)
       - traefik.http.routers.nginx-http.entrypoints=web
