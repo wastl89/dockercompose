@@ -16,10 +16,14 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
 certificatesResolvers:
-  myresolver:
+  ovh:
     acme:
       email: "sebastian@sebastian-ratajczak.de"
-      storage: "acme.json"
+      storage: "/var/letsencrypt/acme.json"
       dnsChallenge:
         provider: "ovh"
         delayBeforeCheck: 10
+        resolvers:
+          - 1.1.1.1
+          - 1.0.0.1
+          - 9.9.9.9

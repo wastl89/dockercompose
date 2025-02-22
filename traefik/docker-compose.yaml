@@ -20,7 +20,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
-      - "./config/acme.json:/acme.json"
+      - ./config/certs/:/var/letsencrypt/acme.json:rw
     restart: unless-stopped
     environment:
       - OVH_ENDPOINT=ovh-eu  # Ändere das zu ovh-ca für Kanada

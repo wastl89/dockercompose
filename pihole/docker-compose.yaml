@@ -29,4 +29,5 @@ services:
       - traefik.enable=true
       - traefik.http.routers.pihole-http.rule=Host(`pihole.home.sebastian-ratajczak.de`)
       - traefik.http.routers.pihole-http.entrypoints=websecure
-      - "traefik.http.routers.pihole-http.tls.certresolver=myresolver"
+      - "traefik.http.routers.pihole-http.tls=true"
+      - "traefik.http.routers.pihole-http.tls.certresolver=ovh"
