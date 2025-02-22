@@ -27,6 +27,6 @@ services:
       - frontend
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nginx-http.rule=Host(`pihole.home.sebastian-ratajczak.de`)
-      - traefik.http.routers.nginx-http.entrypoints=web
-      - "traefik.http.services.kestra-demo-1-svc.loadBalancer.server.port=80"
+      - traefik.http.routers.pihole-http.rule=Host(`pihole.home.sebastian-ratajczak.de`)
+      - traefik.http.routers.pihole-http.entrypoints=web
+      - traefik.http.services.pihole-http.loadBalancer.server.port=80
