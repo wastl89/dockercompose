@@ -15,3 +15,11 @@ providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: "sebastian@sebastian-ratajczak.de"
+      storage: "acme.json"
+      dnsChallenge:
+        provider: "ovh"
+        delayBeforeCheck: 10

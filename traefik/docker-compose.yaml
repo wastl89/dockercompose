@@ -13,14 +13,28 @@ services:
       - "80:80"
       - "443:443"
       - "8080:8080"
+    security_opt:
+      - no-new-privileges:true
     networks:
       - frontend
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - "./config/acme.json:/acme.json"
     restart: unless-stopped
+    environment:
+      - OVH_ENDPOINT=ovh-eu  # Ändere das zu ovh-ca für Kanada
+      - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}
+      - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET}
+      - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`traefik.home.sebastian-ratajczak.de`)"
       - "traefik.http.routers.traefik.entrypoints=web"
       - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.http-catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=https-redirect"
+
+
