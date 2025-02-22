@@ -19,3 +19,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.home.sebastian-ratajczak.de`)"
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.routers.traefik.service=api@internal"

@@ -1,3 +1,8 @@
+---
+networks:
+  frontend:
+    external: true
+
 services:
   pihole:
     container_name: pihole
@@ -5,8 +10,8 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "80:80/tcp"
-      - "443:443/tcp"
+      - "81:80/tcp"
+      - "444:443/tcp"
       # Uncomment the below if using Pi-hole as your DHCP Server
       #- "67:67/udp"
     environment:
@@ -18,3 +23,10 @@ services:
       # Required if you are using Pi-hole as your DHCP server, else not needed
       # - NET_ADMIN
     restart: unless-stopped
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-http.rule=Host(`pihole.home.sebastian-ratajczak.de`)
+      - traefik.http.routers.nginx-http.entrypoints=web
+      - "traefik.http.services.kestra-demo-1-svc.loadBalancer.server.port=80"
