@@ -10,6 +10,7 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
+      - "80:80/tcp"
       # Uncomment the below if using Pi-hole as your DHCP Server
       #- "67:67/udp"
     environment:
@@ -17,6 +18,7 @@ services:
       FTLCONF_webserver_api_password: ${API_PASSWORD}
     volumes:
       - './etc-pihole:/etc/pihole'
+      - './dnsmasq:/etc/dnsmasq.d'
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed
       # - NET_ADMIN
